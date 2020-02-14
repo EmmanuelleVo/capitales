@@ -38,13 +38,19 @@ $countries = [
 
 ];
 
+$countrySelected = '';
 
-
-$countrySelected = $_GET['country'];
-
-if(isset($countrySelected)) {
+if(isset($_GET['country'])) {
     $countrySelected = $_GET['country'];
 }
+
+if(array_key_exists($countrySelected, $countries)) {
+
+} else {
+    $error = 'Message d\'erreur';
+}
+
+
 
 ?>
 
@@ -52,7 +58,7 @@ if(isset($countrySelected)) {
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>Capitales</title>
     </head>
     <body>
 
@@ -62,19 +68,21 @@ if(isset($countrySelected)) {
                 <option value=""></option>
 
                 <?php foreach ($countries as $country => $countryDatas) : ; ?>
-                    <option value="<?= $country; ?>"> <?= mb_strtoupper($country); ?> </option>
+                    <option value="<?= $country ?>" <?= $country===$countrySelected?'selected':'' ?> > <?= mb_strtoupper($country); ?> </option>
                 <?php endforeach; ?>
 
             </select>
             <input type="submit" value="Quelle est la capitale">
         </form>
 
-        <?php if($countrySelected) : ;?>
+        <?php if($countrySelected && $countries[$countrySelected]['capitale'] != '') : ;?>
 
         <p>La capitale de <?= ucwords($countrySelected); ?> est <?= ucwords($countries[$countrySelected]['capitale']);?> </p>
-
         <img src="<?= $countries[$countrySelected]['drapeau'];?>" alt="drapeau de <?= ucwords($countrySelected) ;?>">
 
+        <?php else : ;?>
+
+        <p><?= $error ?></p>
         <?php endif;?>
 
     </body>
