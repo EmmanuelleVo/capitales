@@ -50,8 +50,6 @@ if(array_key_exists($countrySelected, $countries)) {
     $error = 'Message d\'erreur';
 }
 
-
-
 ?>
 
 <!DOCTYPE html>
